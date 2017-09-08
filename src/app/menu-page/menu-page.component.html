@@ -1,0 +1,29 @@
+<router-outlet></router-outlet>
+
+ <div *ngIf="isLogin(); then thenBlock else elseBlock ">
+ </div>
+<ng-template #thenBlock>
+  <router-outlet></router-outlet>
+</ng-template>
+<ng-template #elseBlock>
+	<div id="menu">
+		<p-menubar [model]="items" styleClass="primeMenu" >
+			<div class="ui-g menuItems">
+				<div class="menuCheckbox">
+					<p-checkbox [(ngModel)]="isVerification"
+				                name="groupname"
+				                value="val1"
+				                label="Verification"
+				                binary="true"
+				                (click)="setVerification()"></p-checkbox>
+				</div>
+				<div class="logoutButton">
+					<button pButton (click)="logout()" label="Logout" icon="fa-sign-out"></button>
+				</div>
+			</div>
+		</p-menubar>
+	</div>
+  <router-outlet></router-outlet>
+ </ng-template>
+
+

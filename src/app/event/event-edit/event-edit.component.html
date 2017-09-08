@@ -1,0 +1,53 @@
+<div class="ui-g">
+  <p-growl [(value)]="editMsgs" [life]="3000"></p-growl>
+  <div class="ui-g-6">
+    <form #signupForm="ngForm" (ngSubmit)="saveEditedEvent(signupForm)">
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <input type="text" name="title" pInputText [(ngModel)] = event.title >
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <input type="text" name="desc" pInputText [(ngModel)] = event.desc >
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <p-calendar  [showIcon]="true" [(ngModel)] = "dateFrom" showTime="showTime" name = "from" dateFormat = "dd.mm.yy" hourFormat = "24" placeholder="Date from"></p-calendar>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <p-calendar  [showIcon]="true"  [(ngModel)] = "dateTo" showTime="showTime" dateFormat = "dd.mm.yy" name = "to" hourFormat = "24" placeholder="Date to"></p-calendar>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <p-multiSelect defaultLabel="Select tag" name="eventTags" [options]="tagsName" [(ngModel)]="selectedTag" [ngModelOptions]="{standalone: true}"></p-multiSelect>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-widget-content editCreateContent">
+        <div class="ui-g-12 ui-fluid">
+          <p-dropdown name="eventTemplate" [options]="templatesName" [(ngModel)]="selectedTemplate" [ngModelOptions]="{standalone: true}"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton
+                type="submit"
+                label="Edit Event"
+                class="createEventButton"
+                icon="fa-check"
+                iconPos="right"></button>
+      </div>
+    </form>
+  </div>
+</div>
+

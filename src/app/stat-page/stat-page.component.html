@@ -1,0 +1,41 @@
+<div *ngIf="showTags">
+	<h1>Choose one or more tags to see event statistics by tags</h1>
+	<p-growl [(value)]="msgs" [life]="4000"></p-growl>
+	<div class="tagContent">
+		<p-multiSelect defaultLabel="Select tag" name="eventTags"
+			[options]="tagsName" [(ngModel)]="selectedTag"
+			[ngModelOptions]="{standalone: true}"></p-multiSelect>
+	</div>
+	<div class="tagContent">
+		<button pButton type="button" label="Search" (click)=getEventsByTags()></button>
+	</div>
+</div>
+
+<div
+	*ngIf="sumOfStars == 0 && showStats == true && eventsByTag.length > 0">
+	<h1>There is no votes yet in this events group !</h1>
+
+</div>
+
+<div class="ui-g" *ngIf="showStats == true">
+	<div class="ui-g-3" *ngIf="showStats == true && sumOfStars > 0">
+		<h2>Stars stats</h2>
+		<p-chart type="pie" [data]="starsChart"></p-chart>
+		<h2>Average rating: {{avaregeStars | number :'1.2-2'}}</h2>
+	</div>
+	<div class="ui-g-3" *ngIf="showStats == true && sumOfEmots > 0  ">
+		<h2>Emoticons stats</h2>
+		<p-chart type="pie" [data]="emoticonsChart"></p-chart>
+		<h2>Average rating: {{avaregeEmots | number :'1.2-2'}}</h2>
+	</div>
+
+
+	<div *ngIf="eventsByTag.length == 0" class="ui-g-events">
+		<h1>Couldn't find any events for selected tags</h1>
+	</div>
+
+</div>
+<div class="backButton" *ngIf="showStats == true">
+	<button pButton type="button" label="Back" (click)=hideStats()></button>
+</div>
+

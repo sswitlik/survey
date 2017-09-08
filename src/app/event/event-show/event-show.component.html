@@ -1,0 +1,123 @@
+<p-growl [(value)]="showMsgs" [life]="7500"></p-growl>
+
+
+<div class="ui-g" >
+
+	<div id="scheduleArea" class="ui-g-7">
+			<p-schedule #schedule
+						(onEventClick)="onEventClick($event)"
+						(onViewRender)="scheduleRender(schedule)"
+						[events]="eventsParsed"
+						[fixedWeekCount]="false"
+						[height]="scheduleHeight"
+			 			[options]="option"
+			 			[editable]="false"></p-schedule>
+	</div>
+	<div class="ui-g-5">
+	    <div *ngIf="activeEvent">
+		    <p-dialog header="Warning!" [(visible)]="displayStopDialog" [responsive]="true" showEffect="fade" [modal]="true">
+			    <div *ngIf="isEventActive(this.activeEvent)">
+				    <div >
+					    Are you sure you want to stop this Event?
+				    </div>
+				    <div class="upBorder upMargin">
+						<div class="ui-dialog-buttonpane ui-helper-clearfix">
+						    <button type="button" 
+						       		pButton 
+						       		icon="fa-arrow-right" 
+						      		(click)="backFromStopDialog()" 
+						       		label="No"></button>
+						    <button type="button" 
+						       		pButton 
+						       		class="ui-button-danger" 
+						       		icon="fa-stop-circle" 
+						       		(click)="confirmStopDialog('one')" 
+						       		label="Stop"></button>
+						</div>
+				    </div>
+			    </div>
+			    <div *ngIf="isEventCyclic(this.activeEvent) && isSchemeActive(this.activeEvent.scheme)">
+			    	<div class="upBorder">
+				    </div>
+					<div class="upMargin">
+					    This is a cyclic event. Do You want to stop all the cycles?
+				    </div>
+				    <div class="upBorder upMargin">
+						<div class="ui-dialog-buttonpane ui-helper-clearfix">
+						    <button type="button" 
+						       		pButton 
+						       		class="ui-button-danger" 
+						       		icon="fa-stop-circle-o" 
+						       		(click)="confirmStopDialog('all')" 
+						       		label="Stop All"></button>
+						</div>
+				    </div>
+			    </div>
+			
+			</p-dialog>
+			
+			<p-dialog header="Warning!" [(visible)]="displayDeleteDialog" [responsive]="true" showEffect="fade" [modal]="true">
+				<div>
+				    Are you sure you want to delete this Event?
+				</div>
+				<div class="upBorder upMargin">
+				    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+				        <button type="button" 
+				           		pButton 
+				           		icon="fa-arrow-right" 
+				           		(click)="backFromDeleteDialog()" 
+				           		label="No"></button>
+				        <button type="button" 
+				           		pButton 
+				           		class="ui-button-danger" 
+				           		icon="fa-trash" 
+				           		(click)="confirmDeleteDialog()" 
+				           		label="Delete"></button>
+				   </div>
+				   <div *ngIf="isEventCyclic(this.activeEvent) && isSchemeActive(this.activeEvent.scheme)">
+						<div class="upBorder">
+					    </div>
+					    <div class="upMargin">
+						    This is a cyclic event. If you want to delete all the cycles, stop them first.
+					    </div>
+					    <div class="upBorder upMargin">
+							<div class="ui-dialog-buttonpane ui-helper-clearfix">
+							    <button type="button" 
+							       		pButton 
+							       		class="ui-button-danger" 
+							       		icon="fa-stop-circle-o" 
+							       		(click)="confirmStopDialog('all')" 
+							       		label="Stop All"></button>
+							</div>
+					    </div>
+				    </div>
+			    </div>
+			</p-dialog>
+
+	    	<div class="ui-g-3 ui-fluid">
+		    	<button pButton 
+		    			type="button" 
+		    			label="Edit" 
+		    			(click)="showEditView(activeEvent)"></button>
+	    	</div>
+	    	<div class="ui-g-3 ui-fluid">
+		      	<button pButton 
+		      			type="button" 
+		      			label="Delete" 
+		      			(click)="showDeleteDialog()"></button>
+	    	</div>
+		    <div *ngIf="allowStop()" class="ui-g-3 ui-fluid">
+		      	<button pButton 
+		      			type="button" 
+		      			label="Stop" 
+		      			(click)="showStopDialog(activeEvent)"></button>
+		    </div>
+	    </div>
+		<div class="ui-g-12 ui-fluid">
+			<event-show-stats [event]="activeEvent"></event-show-stats>
+			<!-- 
+			 -->
+		</div>
+	</div>
+</div>
+

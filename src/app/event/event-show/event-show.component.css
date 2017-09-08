@@ -1,0 +1,29 @@
+.schedule {
+	height: 100vh;
+}
+
+.event {
+	cursor: pointer;
+}
+
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-info {
+  background: cornflowerblue;
+}
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-error {
+  background: red;
+}
+.ui-messages-error{
+  padding: 0.1em
+}
+
+.upBorder {
+	border-top: 1px solid #dfd9c3;
+}
+
+.upMargin {
+	margin-top: 0.8em;
+}
+
+.upPadding {
+	margin-top: 0.8em;
+}

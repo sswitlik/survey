@@ -1,0 +1,19 @@
+.primeMenu {
+	border-radius: 0px;
+}
+
+.noPadding {
+	padding: 0px;
+}
+
+.menuCheckbox {
+	padding-right: 20px;
+}
+
+.menuItems {
+	width: 15em;
+}
+
+.logoutButton {
+	float: right;
+}

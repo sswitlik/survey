@@ -1,0 +1,48 @@
+.passwordRadius {
+	border-radius: 6px;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+  margin: 0 auto;
+}
+.loginInput {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.buttonLogin {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+}
+
+.form-center {
+  float: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-error {
+  background: red;
+}
+.ui-messages-error{
+  padding: 0.1em
+}

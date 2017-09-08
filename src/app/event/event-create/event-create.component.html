@@ -1,0 +1,186 @@
+<div class="ui-g">
+  	<p-growl [(value)]="msgs" 
+  			 [life]="3000"></p-growl>
+	<div class="ui-g-6" id="leftPanel">
+	
+		<form #signupForm="ngForm" 
+			  (ngSubmit)="addEvent(signupForm)">
+		
+		  	
+		  	<div class="ui-g-12 ui-widget-content templateCreateContent">
+			  	<div class="ui-g-12">
+			  		<p-checkbox label="Cyclic event"  
+			  					[(ngModel)]="checked" 
+			  					binary="true" 
+			  					[ngModelOptions]="{standalone: true} ">
+			  		</p-checkbox>
+			  	</div>
+		  	</div>
+			
+			<div class="ui-g-12 ui-widget-content templateCreateContent">
+				<div class="ui-g-12 ui-fluid">
+					<input type="text" 
+						   name="title" 
+						   pInputText 
+						   placeholder="Title" 
+						   [(ngModel)]="valTitle">
+				</div>
+				
+				<div class="ui-g-12 ui-fluid">
+					<input type="text" 
+						   name="desc" 
+						   pInputText 
+						   placeholder="Description" 
+						   [(ngModel)]="valDesc">
+				</div>
+			</div>
+		   	
+		   	<div class="ui-g-12 ui-widget-content templateCreateContent">
+			   	<div class="ui-g-12 ui-fluid">
+			        <p-calendar [(ngModel)]="valDateFrom" 
+			        			[showIcon]="true"
+			        			showTime="showTime" 
+			        			name = "from" 
+			        			[locale]="calendarOption"
+			        			placeholder="Date from"></p-calendar>
+			   	</div>
+			   	
+			   	<div class="ui-g-12 ui-fluid ">
+			        <p-calendar [(ngModel)]="valDateTo" 
+			        			[showIcon]="true" 
+			        			showTime="showTime" 
+			        			name = "to" 
+			        			[locale]="calendarOption"
+			        			placeholder="Date to"></p-calendar>
+			   	</div>
+			  	
+			  	<div *ngIf="checked" class="ui-g-12 ui-fluid">
+		      		<p-calendar [(ngModel)]="valDateFirstStop" 
+		      				    [showIcon]="true" 
+		      				    showTime="showTime" 
+		      				    name = "firstStop" 
+		      				    [locale]="calendarOption"
+		      				    placeholder="Date first stop"></p-calendar>
+		      				    
+		      				    
+			  	</div>
+		   	</div>
+		  	
+		  	<div *ngIf="checked" class="ui-g-12 ui-fluid ui-widget-content templateCreateContent">
+		  		<div class="ui-g-12">
+			  		<input type="number" 
+			  			   pInputText 
+			  			   [(ngModel)]="valInterval" 
+			  			   name="interval" 
+			  			   placeholder="Interval" 
+			  			   ngModel>
+		  		</div>
+		  	</div>
+
+		  	<div class="ui-g-12 ui-widget-content templateCreateContent">
+			  	<div class="ui-g-12 ui-fluid">
+			    	<p-dropdown name="eventTemplate" 
+			    				[options]="templatesName"
+			    				[(ngModel)]="selectedTemplate" 
+			    				[ngModelOptions]="{standalone: true}"
+			    				styleClass="eventCreateDropdown"
+			    				panelStyleClass="eventCreateDropdownPanel"></p-dropdown>
+			  	</div>
+			  	
+			  	<div class="ui-g-12 ui-fluid">
+			    	<p-multiSelect defaultLabel="Select tag" 
+			    				   name="eventTags" 
+			    				   [options]="tagsName" 
+			    				   [(ngModel)]="selectedTag" 
+			    				   [ngModelOptions]="{standalone: true}"></p-multiSelect>
+			  	</div>
+		  	</div>
+		  	
+		  	<div *ngIf="checked">
+			  	<div class="ui-g-12 ui-fluid ui-widget-content templateCreateContent">
+			  		<div class="ui-g-12">
+				    	<p-multiSelect defaultLabel="Select blocked week days" 
+				    				   [options]="weekDays" 
+				    				   [(ngModel)]="disabledWeekDays" 
+				    				   [ngModelOptions]="{standalone: true}" ></p-multiSelect>
+			  		</div>
+			  	</div>
+
+			  	<div class="ui-g-12 ui-fluid ui-widget-content templateCreateContent">
+			  		<div class="ui-g-6" id="disabledDatesCalendarArea">
+				  		<p-calendar #disabledDate
+				        			(onSelect) = "selectDisabledDate(disabledDate.value)"
+				        			styleClass="disabledDatesCalendar"
+				        			[inline]="true"
+				        			name = "to"
+				        			[locale]="calendarOption"
+				        			placeholder="Date to"></p-calendar>
+					</div>
+					
+					<div class="ui-g-6" id="restOfDisabledDatesCalendarArea">				        			
+						<p-dataTable [value]="disabledStartDaysTemplate"
+									 scrollable="true" 
+									 scrollHeight="345px" 
+									 class="disabledStartDays"
+									 emptyMessage="No Dates Selected">
+							<p-column field="label" header="Date"></p-column>
+	    					<p-column styleClass="tableDeleteRow">
+						        <ng-template pTemplate="header">
+						            Delete
+						        </ng-template>
+						        <ng-template let-date="rowData" pTemplate="body">
+						            <button type="button" 
+						            		pButton 
+						            		(click)="deleteDisabledDate(date)" 
+						            		icon="fa-close" 
+						            		class="deleteDateButton"></button>
+						        </ng-template>
+						    </p-column>					 	
+						</p-dataTable>
+			  		</div>
+			  	</div>
+		  	</div>
+		  	
+		  	<div class="ui-g-12">
+		    	<button pButton 
+		    			type="submit" 
+		    			label="Create Event"
+		    			class="createEventButton"
+			            icon="fa-check"
+			            iconPos="right"></button>
+		  	</div>
+		</form>
+	
+	</div>
+	
+	<div *ngIf="checked" class="ui-g-6">
+		<div class="ui-g-12 ui-widget-content templateCreateContent">
+			<app-scheme-view [from]="valDateFrom"
+							 [to]="valDateTo"
+							 [firstStop]="valDateFirstStop"
+							 [interval]="valInterval"
+							 [disabledWeekDays]="disabledWeekDays"
+							 [disabledStartDays]="disabledStartDays"></app-scheme-view>
+		</div>
+	</div>
+	
+	<div class="ui-g-12">
+	  	<div *ngIf="!checked" class="ui-g-12">
+	    	<button type="button" 
+	    			pButton 
+	    			(click)="eventInfo()" 
+					icon="fa-info-circle"
+	    			label="Event Info" 
+	    			class="ui-button-info"></button>
+	  	</div>
+	  	
+	  	<div *ngIf="checked" class="ui-g-12 ui-md-12">
+			<button type="button" 
+					pButton  
+					(click)="cyclicEventInfo()" 
+					icon="fa-info-circle"
+					label="Cyclic Info" 
+					class="ui-button-info"></button>
+	  	</div>
+	</div>
+</div>

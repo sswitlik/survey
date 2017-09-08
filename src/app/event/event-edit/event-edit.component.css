@@ -1,0 +1,72 @@
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-info {
+  background: cornflowerblue;
+}
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-error {
+  background: red;
+}
+.ui-messages-error{
+  padding: 0.1em
+}
+.ui-messages-error{
+  padding: 0.1em
+}
+
+.eventCreateDropdown {
+  width: 100% !important;
+}
+
+.eventCreateDropdownPanel {
+  width: 100%;
+}
+
+.ui-multiselect-panel {
+  width: 100%;
+}
+
+.ui-multiselect-filter-container {
+  width: 50% !important;
+}
+
+.createEventButton {
+  width: auto;
+  height: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+.editCreateContent{
+  border-radius: 6px;
+  margin: 5px;
+}
+
+.disabledStartDays {
+  /*
+    margin: 5px;
+    */
+}
+
+#disabledDatesCalendarArea {
+  width: 18em;
+}
+
+#restOfDisabledDatesCalendarArea {
+  width: calc(100% - 18em);
+}
+
+.deleteDateButton {
+  width: 40px !important;
+  margin: 0 auto;
+}
+
+.tableDeleteRow {
+  width: 100px;
+}
+
+#leftPanel {
+  min-width: 655px;
+}
+
+td {
+  text-align: center;
+}

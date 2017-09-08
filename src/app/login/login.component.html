@@ -1,0 +1,21 @@
+<div class="ui-g-12 loginCenter">
+  <p-growl [(value)]="msgsValLogin"></p-growl>
+  <form name="form" class="ui-g-4 form-center" (ngSubmit)="login()" #f="ngForm" >
+    <div class="container">
+      <h2>Welcome to Satisfaction Survey</h2>
+      
+      <label><b>Username</b></label>
+      
+      <input type="text" pInputText class="loginInput form-control" name="username" [(ngModel)]="model.username" required/>
+      
+      <label><b>Password</b></label>
+      
+      <input type="password" pPassword class="loginInput form-control passwordRadius" name="password" [(ngModel)]="model.password"  required/>
+      
+      <div class="container" style="background-color:#f1f1f1">
+        <button pButton="loading" label="Login" class="buttonLogin"></button>
+      </div>
+    </div>
+  </form>
+</div>
+

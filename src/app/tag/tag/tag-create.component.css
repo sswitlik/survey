@@ -1,0 +1,30 @@
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-info {
+  background: cornflowerblue;
+}
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-error {
+  background: red;
+}
+.ui-messages-error{
+  padding: 0.1em
+}
+
+.createTagButton {
+  width: auto;
+  height: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+
+.deleteDateButton {
+  width: 40px !important;
+  margin: 0 auto;
+}
+
+.tableDeleteRow {
+  width: 100px;
+}
+
+td {
+  text-align: center;
+}

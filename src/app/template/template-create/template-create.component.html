@@ -1,0 +1,112 @@
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<p-growl [(value)]="msgsTemp" [life]="3000"></p-growl>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="ui-g-12">
+			<button type="button" pButton (click)="tempInfo()"
+				label="Template Create Info" icon="fa-info-circle"
+				class="ui-button-info surveyInfoButton"></button>
+		</div>
+		<div class="ui-g-6">
+			<div class="ui-g-12 ui-widget-content templateCreateContent">
+				<p-checkbox [(ngModel)]="starsCheck" name="groupname" value="val1"
+					label="Stars" binary="true"></p-checkbox>
+			</div>
+
+			<div class="ui-g-12 ui-widget-content templateCreateContent">
+				<p-checkbox [(ngModel)]="emoticonsCheck" name="groupname2"
+					value="val2" binary="true" label="Emoticons"></p-checkbox>
+			</div>
+
+			<div class="ui-g-12 ui-widget-content templateCreateContent">
+				<p-checkbox [(ngModel)]="commentCheck" binary="true"
+					name="groupname3" value="val3" label="Comment"></p-checkbox>
+			</div>
+
+			<div class="ui-g-12 ui-widget-content templateCreateContent">
+				<p-checkbox [(ngModel)]="questionnaireCheck" binary="true"
+					name="groupname4" value="val4" label="Questionnaire"></p-checkbox>
+
+				<div *ngIf="questionnaireCheck== true">
+					<div class="ui-g-12">
+						<div class="ui-g-12 ui-fluid">
+							<p-multiSelect [options]="questionnaires"
+								[(ngModel)]="selectedQuestionnaires"
+								[ngModelOptions]="{standalone: true}"></p-multiSelect>
+						</div>
+
+						<div class="ui-g-12 ui-fluid">
+							<input #inp type="text" pInputText placeholder="New option"
+								(keyup.enter)="onEnter(inp)">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ui-g-12 ui-fluid">
+				<input #name type="text" style="font-size: 20px" name="name"
+					pInputText placeholder="Name of the template" [(ngModel)]="valTemp">
+			</div>
+
+			<div class="ui-g-12">
+				<button pButton type="button" (click)="addTemplate(name.value)"
+					label="Create template" icon="fa-check" iconPos="right"
+					class="createTemplateButton"></button>
+				<button pButton type="button" label="Cancel editing"
+					(click)="clearTemplate()" class="createTemplateButton"
+					*ngIf="editedTemplate"></button>
+				<div *ngIf="editedTemplate" class = "currentTemplate">
+					<h2 *ngIf = "editedTemplate">You are editing: {{editedTemplate.name}}</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="ui-g-6 datacontainer">
+			<p-dataList [value]="templates" [paginator]="true" [rows]="5">
+			<p-header> List of Templates </p-header> <ng-template let-template
+				pTemplate="item">
+			<div class="ui-g ui-fluid event-item">
+				<div class="ui-g-12 ui-md-6 event-details">
+					<div class="ui-g">
+						<div class="ui-g-4 ui-sm-6" style="white-space: nowrap">
+							Name:<strong>  {{template.name}}</strong>
+						</div>
+						<div class="ui-g-10 ui-sm-6"></div>
+						<div class="ui-g-2 ui-sm-1">Opinions:</div>
+						<div class="ui-g-10 ui-sm-6">
+							<ul class="opinions">
+								<div *ngIf="template.opinions">
+									<div *ngIf="isStarsInTemplate(template.opinions)">
+										<li class = "opinions">Stars</li>
+									</div>
+									<div *ngIf="isEmotsInTemplate(template.opinions)">
+										<li class = "opinions">Emoticons</li>
+									</div>
+									<div *ngIf="isCommentInTemplate(template.opinions)">
+										<li class = "opinions">Comment</li>
+									</div>
+									<div *ngFor="let opinion of template.opinions">
+										<div *ngIf="opinion.type.type == 'Questionnaire'">
+											<li class = "opinions">{{opinion.description}}</li>
+										</div>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="deleteButton">
+				<button pButton type="button" label="Edit"
+					(click)="editTemplate(template)"></button>
+			</div>
+			<hr>
+			</ng-template> </p-dataList>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+h1 {
+  justify-content: center;
+  text-align: center;
+}
+.ui-g-events{
+	margin: 0 auto;
+}
+
+.backButton{
+  display: flex;
+  justify-content: center;
+}
+
+.tagContent{
+	margin-top: 40px;
+ 	display: flex;
+  	justify-content: center;
+  	
+}
+
+h2{
+	margin-top: 15px ;
+	font-size: 28px;
+}
+.ui-g-3{
+	margin-right: 30px;
+}
+.ui-growl-item-container.ui-state-highlight.ui-growl-message-error {
+  background: red;
+}

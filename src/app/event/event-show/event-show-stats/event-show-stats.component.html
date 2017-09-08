@@ -1,0 +1,72 @@
+<div *ngIf="event">
+	<div *ngIf="eventExists(); then thenBlock else elseBlock"></div>
+	<ng-template #thenBlock>
+		<div class="ui-g">
+	  
+		    <div class="ui-g-12">
+		    	<h2 class="noMargin">{{event.title}} </h2>	
+
+				<h4>
+					{{printEventStatus(this.event)}}
+				</h4>
+		      	<div *ngIf="statsIsEmpty()">
+		        	<h1> There is no votes! </h1>
+		     	</div>
+		    
+		      	<button pButton type="button"
+		         	    *ngIf="event.answerMask.commentOption.length > 0 && showStats == true"
+		              	label="See Comments"
+		              	icon="fa-comments"
+		              	(click)="showComments()"
+		              	style="float: right"></button>
+		    </div>
+		    
+		    <div class="ui-g-6" *ngIf="starsChart.labels.length>0 && showStats == true">
+		      	<h2>Stars stats</h2>
+		      	<p-chart #starChartObject
+		      		   	(click)="abc(starChartObject)"
+		      		   	type="pie"
+		      		   	[options]="chartOptions"
+		               	[data]="starsChart"></p-chart>
+		    </div>
+		    
+		    <div class="ui-g-6" *ngIf="questionnairesChart.labels.length >0 && showStats == true ">
+		      	<h2>Questionnaire stats</h2>
+		      	<p-chart type="pie"
+		               	[data]="questionnairesChart"></p-chart>
+		    </div>
+		    
+		    <div class="ui-g-3">
+		    </div>
+		    
+		    <div class="ui-g-6" *ngIf="emoticonsChart.labels.length >0 && showStats == true  ">
+		      	<h2>Emoticons stats</h2>
+		      	<p-chart type="pie"
+		               	[data]="emoticonsChart"></p-chart>
+		    </div>
+		    
+		    <div class="ui-g-3">
+		    </div>
+	  	</div>
+	  	<div *ngIf="showStats == false && event.answerMask.commentOption.length > 0">
+		    <!--<div *ngFor=" let opinionComment of event.answerMask.commentOption">-->
+		      <!--{{opinionComment.commentOption}}-->
+		    <!--</div>-->
+	    	<p-dataTable [value]="event.answerMask.commentOption">
+	      		<p-column field="commentOption" header="Comments: "></p-column>
+	    	</p-dataTable>
+		    <button pButton type="button"
+		            *ngIf="event.answerMask.commentOption.length > 0"
+		            label="Back"
+		            icon="fa-comments"
+		            (click)="showStatistics()"
+		            style="float: right"></button>
+		
+	
+	  	</div>
+	</ng-template>
+	<ng-template #elseBlock>
+		<h1>Event is not already exist</h1>
+		{{event.from.toDateString()}}
+	</ng-template>
+</div>

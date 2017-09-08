@@ -1,0 +1,42 @@
+<p-growl [(value)]="msgsTag" [life]="7500"></p-growl>
+
+<div class="ui-g">
+  <div class="ui-g-12">
+    <button type="button"
+            pButton (click)="tagInfo()"
+            label="Tag Create Info"
+            icon="fa-info-circle"
+            class="ui-button-info surveyInfoButton"></button>
+  </div>
+  <div class="ui-g-6">
+    <div class="ui-g-12 ui-widget-content templateCreateContent ui-fluid">
+      <input #name type="text" style="font-size: 20px" name="name" pInputText
+             placeholder="Name of the tag" [(ngModel)]="valTag">
+    </div>
+    <div class="ui-g-12 ">
+      <button pButton type="button"
+              (click)="addTag(name.value)"
+              label="Create tag"
+              icon="fa-check"
+              iconPos="right"
+              class="createTagButton"></button>
+    </div>
+  </div>
+  <div class="ui-g-6" >
+    <p-dataTable [value]="tags"
+                 emptyMessage="No tags created">
+      <p-column field="name" header="Tag"></p-column>
+      <p-column styleClass="tableDeleteRow">
+        <ng-template pTemplate="header">
+          Delete
+        </ng-template>
+        <ng-template let-tag="rowData" pTemplate="body">
+          <button type="button"
+                  pButton
+                  (click)="deleteTag(tag)"
+                  icon="fa-close"
+                  class="deleteDateButton"></button>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+</div>

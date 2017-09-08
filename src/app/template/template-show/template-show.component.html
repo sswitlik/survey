@@ -1,0 +1,37 @@
+<div class="ui-g-10 datacontainer">
+	<p-dataList [value]="templates" [paginator]="true" [rows]="5">
+	<p-header> List of Templates </p-header> <ng-template let-template
+		pTemplate="item">
+	<div class="ui-g ui-fluid event-item">
+		<div class="ui-g-12 ui-md-6 event-details">
+			<div class="ui-g">
+				<div class="ui-g-4 ui-sm-6">
+					<strong> Name: {{template.name}}</strong>
+				</div>
+				<div class="ui-g-10 ui-sm-6"></div>
+				<div class="ui-g-2 ui-sm-1">Opinions:</div>
+				<div class="ui-g-10 ui-sm-6">
+					<ul class="template.opinions">
+						<div *ngIf="isStarsInTemplate(template.opinions)">
+							<li>Stars</li>
+						</div>
+						<div *ngIf="isEmotsInTemplate(template.opinions)">
+							<li>Emoticons</li>
+						</div>
+
+						<div *ngFor="let opinion of template.opinions">
+							<div *ngIf="opinion.type.type == 'Questionnaire'">
+								<li>{{opinion.description}}</li>
+							</div>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="deleteButton">
+		<button pButton type="button" label="Edit" (click)="goToEdit(template)"></button>
+	</div>
+	<hr>
+	</ng-template> </p-dataList>
+</div>

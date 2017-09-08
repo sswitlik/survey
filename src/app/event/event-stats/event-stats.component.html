@@ -1,0 +1,21 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <h1>Event #{{event.id}} stats</h1>
+  </div>
+  <div  *ngIf="starsChart.labels.length > 0" class="ui-g-4">
+    <h1>Stars stats</h1>
+    <p-chart type="doughnut" [data]="starsChart"></p-chart>
+  </div>
+  <div  *ngIf = "questionnairesChart.labels.length > 0" class="ui-g-4">
+    <h1>Questionnaires stats</h1>
+    <p-chart type="doughnut" [data]="questionnairesChart"></p-chart>
+  </div>
+  <div *ngIf = "commentsChart.labels.length > 0"  class="ui-g-4">
+    <h1>Comments stats</h1>
+    <p-chart type="doughnut" [data]="commentsChart"></p-chart>
+  </div>
+  <div *ngIf="emoticonsChart.labels.length > 0" class="ui-g-4">
+    <h1>Emoticons stats</h1>
+    <p-chart type="doughnut" [data]="emoticonsChart"></p-chart>
+  </div>
+</div>
